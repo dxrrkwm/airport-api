@@ -1,13 +1,6 @@
 from django.contrib import admin
 
-from airport.models import (Crew,
-                            Airplane,
-                            AirplaneType,
-                            Airport,
-                            Route,
-                            Flight,
-                            Order,
-                            Ticket)
+from airport.models import Airplane, AirplaneType, Airport, Crew, Flight, Order, Route, Ticket
 
 
 @admin.register(Crew)
