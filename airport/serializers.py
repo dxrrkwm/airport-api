@@ -1,7 +1,8 @@
 from django.db import transaction
-from models import Airplane, AirplaneType, Airport, Crew, Flight, Order, Route
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+
+from airport.models import Airplane, AirplaneType, Airport, Crew, Flight, Order, Route
 
 
 class AirportSerializer(serializers.ModelSerializer):

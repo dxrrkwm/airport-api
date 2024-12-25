@@ -1,6 +1,7 @@
-from models import Airplane, AirplaneType, Airport, Crew, Flight, Order, Route
 from rest_framework import permissions, viewsets
-from serializers import (
+
+from airport.models import Airplane, AirplaneType, Airport, Crew, Flight, Order, Route
+from airport.serializers import (
     AirplaneSerializer,
     AirplaneTypeSerializer,
     AirportSerializer,
