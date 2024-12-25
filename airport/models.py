@@ -69,5 +69,16 @@ class Ticket(models.Model):
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
+    @staticmethod
+    def validate_ticket(row, seat, flight, error):
+        if row < 1:
+            error["row"] = "Row number must be positive"
+        if seat < 1:
+            error["seat"] = "Seat number must be positive"
+        if row > flight.airplane.rows:
+            error["row"] = "Row number is too big"
+        if seat > flight.airplane.seats_in_row:
+            error["seat"] = "Seat number is too big"
+
     def __str__(self):
         return f"Ticket {self.id} for {self.flight} in row {self.row}, seat {self.seat}"
