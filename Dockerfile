@@ -3,18 +3,17 @@ FROM python:3.12-alpine
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-POETRY_NO_INTERACTION=1 \
-POETRY_VIRTUALENVS_CREATE=false \
-POETRY_CACHE_DIR='/var/cache/pypoetry' \
-POETRY_HOME='/usr/local' \
-POETRY_VERSION=1.8.5
+RUN pip install poetry==1.8.5
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
 
 WORKDIR /app
+
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install --no-interaction --no-ansi
+RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --no-root
 
 RUN adduser \
     --disabled-password \
@@ -25,6 +24,9 @@ RUN adduser \
 USER appuser
 
 COPY . .
+
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 

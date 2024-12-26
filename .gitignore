@@ -3,4 +3,6 @@
 __pycache__
 *.pyc
 .env
-requirements.txt
+airport/migrations/
+user/migrations/
+db.sqlite3
