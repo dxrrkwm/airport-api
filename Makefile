@@ -9,14 +9,14 @@ help:
 	@echo "  make <target>"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install-deps    Install all dependencies using Poetry"
+	@echo "  deps    Install all dependencies using Poetry"
 	@echo "  run             Run the Django development server"
 	@echo "  migrate         Apply migrations"
 	@echo "  makemigrations  Create new migrations"
 	@echo "  lint            Run ruff"
 	@echo "  clean           Remove  __pycache__"
 
-.PHONY: install-deps
+.PHONY: deps
 install-deps:
 	$(POETRY) install
 
