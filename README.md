@@ -2,7 +2,10 @@
 
 This is a DRF project for managing various components of an airport, including airplane types, airplanes, airports, crews, flights, orders, and routes. The API supports authentication and user management and provides detailed documentation via Redoc and Swagger.
 
-## Features
+## Project structure 📊
+![image](https://github.com/user-attachments/assets/4aba7db1-d24c-48f4-a31f-747c4e537d2b)
+
+## Features ✨
 
 - **API Endpoints** for managing:
   - Airplane Types
@@ -20,7 +23,7 @@ This is a DRF project for managing various components of an airport, including a
 - **Code Linting** - Ruff
 - **Containerized Deployment** - Docker and Docker Compose
 
-## Technologies used
+## Technologies used ⚙️
 
 - **Backend**: Python 3.12, Django 5.1.4, Django REST Framework
 - **Database**: PostgreSQL
@@ -31,7 +34,7 @@ This is a DRF project for managing various components of an airport, including a
 
 ---
 
-## Getting Started
+## Getting Started 🐾
 
 ### Prerequisites
 
@@ -98,7 +101,7 @@ docker-compose up --build
 
 ---
 
-## API Endpoints
+## API Endpoints 🧩
 
 Below is a list of the available API endpoints:
 
@@ -135,7 +138,7 @@ Run the Ruff linter:
 make lint
 ```
 
-## Documentation
+## Documentation 📄
 
 API documentation is available via Redoc at:
 ```
