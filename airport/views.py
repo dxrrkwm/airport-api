@@ -19,7 +19,7 @@ class AirportViewSet(viewsets.ModelViewSet):
 
 
 class RouteViewSet(viewsets.ModelViewSet):
-    queryset = Route.objects.all()
+    queryset = Route.objects.select_related("departure_airport", "arrival_airport").all()
     serializer_class = RouteSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -31,7 +31,7 @@ class AirplaneTypeViewSet(viewsets.ModelViewSet):
 
 
 class AirplaneViewSet(viewsets.ModelViewSet):
-    queryset = Airplane.objects.all()
+    queryset = Airplane.objects.select_related("airplane_type").all()
     serializer_class = AirplaneSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -43,12 +43,19 @@ class CrewViewSet(viewsets.ModelViewSet):
 
 
 class FlightViewSet(viewsets.ModelViewSet):
-    queryset = Flight.objects.all()
+    queryset = Flight.objects.select_related(
+        "route",
+        "airplane",
+        "crew",
+    ).all()
     serializer_class = FlightSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.select_related(
+        "flight",
+        "passenger",
+    ).all()
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
