@@ -18,6 +18,7 @@ django-debug-toolbar = "^4.4.6"
 
 [tool.poetry.group.dev.dependencies]
 ruff = {extras = ["pyupgrade"], version = "^0.8.4"}
+isort = "^5.13.2"
 
 
 [tool.ruff]
@@ -64,9 +65,18 @@ select = [
 ignore = [
     "C901",  # function too complex
     "W191",  # indentation contains tabs
-    "D401"  # first line should be in imperative mood
+    "D401",  # first line should be in imperative mood
+    "I001"   # isort
 
 ]
+
+[tool.isort]
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+lines_after_imports = 2
 
 [build-system]
 requires = ["poetry-core"]

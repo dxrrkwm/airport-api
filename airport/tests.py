@@ -6,6 +6,7 @@ from rest_framework.exceptions import ValidationError
 from .models import Airport, Order
 from .serializers import AirportSerializer, OrderSerializer, RouteSerializer
 
+
 User = get_user_model()
 
 class SerializerTests(TestCase):
@@ -26,22 +27,22 @@ class SerializerTests(TestCase):
       "distance": 1500
     }
 
-  def test_airport_serializer_valid(self):  # Test airport serializer with valid data
+  def test_airport_serializer_valid(self):
     serializer = AirportSerializer(data=self.airport_data)
     self.assertTrue(serializer.is_valid())
     airport = serializer.save()
     self.assertEqual(airport.name, "JFK Airport")
 
-  def test_airport_serializer_invalid(self):  # Test airport serializer with invalid data
+  def test_airport_serializer_invalid(self):
     invalid_data = {"closest_big_city": "New York"}
     serializer = AirportSerializer(data=invalid_data)
     self.assertFalse(serializer.is_valid())
 
-  def test_airport_serializer_empty(self):  # Test airport serializer with empty data
+  def test_airport_serializer_empty(self):
     serializer = AirportSerializer(data={})
     self.assertFalse(serializer.is_valid())
 
-  def test_route_serializer_valid(self):  # Test route serializer with valid data
+  def test_route_serializer_valid(self):
     serializer = RouteSerializer(data={
       "source": self.route_data["source"].id,
       "destination": self.route_data["destination"].id,
@@ -49,7 +50,7 @@ class SerializerTests(TestCase):
     })
     self.assertTrue(serializer.is_valid())
 
-  def test_route_serializer_same_airports(self):  # Test route serializer with same source and destination
+  def test_route_serializer_same_airports(self):
     invalid_route = {
       "source": self.route_data["source"].id,
       "destination": self.route_data["source"].id,
@@ -58,14 +59,14 @@ class SerializerTests(TestCase):
     serializer = RouteSerializer(data=invalid_route)
     self.assertTrue(serializer.is_valid())
 
-  def test_order_serializer_create(self):  # Test order serializer create method
+  def test_order_serializer_create(self):
     order_data = {"user": self.user.id}
     serializer = OrderSerializer(data=order_data)
     self.assertTrue(serializer.is_valid())
     order = serializer.save()
     self.assertEqual(order.user, self.user)
 
-  def test_order_serializer_update(self):  # Test order serializer update method
+  def test_order_serializer_update(self):
     order = Order.objects.create(user=self.user)
     new_user = User.objects.create_user(email="admin@test.com", password="pass123")
 
@@ -74,13 +75,13 @@ class SerializerTests(TestCase):
     updated_order = serializer.save()
     self.assertEqual(updated_order.user, new_user)
 
-  def test_order_serializer_no_user(self):  # Test order serializer without user
+  def test_order_serializer_no_user(self):
     order_data = {}
     serializer = OrderSerializer(data=order_data)
     with self.assertRaises(ValidationError):
       serializer.is_valid(raise_exception=True)
 
-  def test_order_serializer_read_only_fields(self):  # Test order serializer with read-only fields
+  def test_order_serializer_read_only_fields(self):
     order = Order.objects.create(user=self.user)
     serializer = OrderSerializer(order)
     self.assertIn("created_at", serializer.data)
