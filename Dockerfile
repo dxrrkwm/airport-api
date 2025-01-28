@@ -21,12 +21,11 @@ RUN adduser \
     --no-create-home \
     appuser
 
-USER appuser
-
 COPY . .
 
-ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH"
+RUN chown -R appuser:appuser /app
+
+USER appuser
 
 EXPOSE 8000
 
