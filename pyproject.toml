@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "airport-api"
+package-mode = false
+version = "0.1.0"
+description = ""
+authors = ["Vadym Sulim <ohnooq1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.4"
+djangorestframework = "^3.15.2"
+python-dotenv = "^1.0.1"
+djangorestframework-simplejwt = "^5.3.1"
+drf-spectacular = "^0.28.0"
+psycopg2-binary = "^2.9.10"
+django-debug-toolbar = "^4.4.6"
+
+[tool.poetry.group.dev.dependencies]
+ruff = {extras = ["pyupgrade"], version = "^0.8.4"}
+isort = "^5.13.2"
+
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "migrations",
+    "node_modules",
+    "static",
+    "templates",
+    "venv",
+    "env",
+    ".git",
+    ".idea",
+    ".venv",
+    ".dockerignore",
+    ".env",
+    ".gitignore",
+    ".classpath",
+    ".DS_Store",
+    "*.dbmdl",
+    "*.user",
+    "*.dockerignore",
+    "*.env",
+    "*.git",
+    "*.gitignore",
+    "*.project",
+    "*.settings",
+    "*.toolstarget",
+    "*.classpath",
+    "*.DS_Store",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # PEP8 errors
+    "W",  # PEP8 warnings
+    "F",  # PyFlakes
+    "I",  # isort
+    "B",  # bugbear
+    "C4",  # mypy
+    "N",  # flake8-bugbear
+    "Q",  # flake8-quotes
+]
+ignore = [
+    "C901",  # function too complex
+    "W191",  # indentation contains tabs
+    "D401",  # first line should be in imperative mood
+    "I001"   # isort
+
+]
+
+[tool.isort]
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+lines_after_imports = 2
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
